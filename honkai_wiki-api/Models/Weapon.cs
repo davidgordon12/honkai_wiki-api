@@ -1,7 +1,10 @@
-﻿namespace honkai_wiki_api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace honkai_wiki_api.Models
 {
     public class Weapon
     {
+        [Key]
         public string Name { get; set; }
         public string Type { get; set; }
         public int Stars { get; set; }

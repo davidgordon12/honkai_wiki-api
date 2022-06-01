@@ -1,7 +1,10 @@
-﻿namespace honkai_wiki_api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace honkai_wiki_api.Models
 {
     public class Skill
     {
+        [Key]
         public string Title { get; set; }
         public string Description { get; set; }
         public int SP { get; set; } = 0;
