@@ -1,4 +1,4 @@
-﻿using honkai_wiki.Models;
+﻿using honkai_wiki_api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace honkai_wiki_api.Data
