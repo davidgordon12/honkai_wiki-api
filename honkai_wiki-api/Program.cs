@@ -19,9 +19,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/valkyries", () =>
+app.MapGet("/valkyries", async () =>
 {
-    var valkyries = valkyrieService.GetValkyriesAsync();
+    var valkyries = await valkyrieService.GetValkyriesAsync();
     return valkyries;
 });
 
