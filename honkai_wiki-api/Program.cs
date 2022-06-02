@@ -25,4 +25,10 @@ app.MapGet("/valkyries", async () =>
     return valkyries;
 });
 
+app.MapGet("/valkyrie/{id}", async (int id) =>
+{
+    var valkyrie = await valkyrieService.GetValkyrieAsync(id);
+    return valkyrie;
+});
+
 app.Run();

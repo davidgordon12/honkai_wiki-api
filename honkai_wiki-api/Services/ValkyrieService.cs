@@ -13,7 +13,6 @@ namespace honkai_wiki_api.Services
         {
             HonkaiContext context = new HonkaiContext();
             List<Valkyrie> valkyries = new();
-
             command = new SqlCommand("SELECT * FROM Valkyries", context.sqlConnection);
 
             using (var ctx = context.sqlConnection)
@@ -29,15 +28,37 @@ namespace honkai_wiki_api.Services
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
-                        Image = reader.GetString(2),
-                        Weapon = reader.GetInt32(3),
-                        Description = reader.GetString(4)
+                        Description = reader.GetString(2),
+                        Image = reader.GetString(3),
+                        Weapon = reader.GetInt32(4)
                     });
                 }
 
                 ctx.Close();
 
                 return new JsonResult(valkyries);
+            }
+        }
+
+        public async Task<JsonResult> GetValkyrieAsync(int id)
+        {
+            HonkaiContext context = new HonkaiContext();
+            command = new SqlCommand($"SELECT Name, Description, Image FROM Valkyries WHERE id = '{id}'", context.sqlConnection);
+
+            using (var ctx = context.sqlConnection)
+            {
+                ctx.Open();
+                var task = await Task.Run(async () =>
+                    reader = await command.ExecuteReaderAsync()
+                );
+
+                return new JsonResult(new Valkyrie
+                {
+                    Name = reader.GetString(1),
+                    Description = reader.GetString(2),
+                    Image = reader.GetString(3),
+                    Weapon = reader.GetInt32(4)
+                });
             }
         }
     }
