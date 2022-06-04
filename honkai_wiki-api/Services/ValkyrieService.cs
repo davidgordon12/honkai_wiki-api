@@ -22,7 +22,7 @@ namespace honkai_wiki_api.Services
                     reader = await command.ExecuteReaderAsync()
                 );
 
-                while(reader.Read())
+                while(await reader.ReadAsync())
                 {
                     valkyries.Add(new Valkyrie
                     {
@@ -43,17 +43,18 @@ namespace honkai_wiki_api.Services
         public async Task<JsonResult> GetValkyrieAsync(int id)
         {
             HonkaiContext context = new HonkaiContext();
-            command = new SqlCommand($"SELECT Name, Description, Image FROM Valkyries WHERE id = '{id}'", context.sqlConnection);
+            command = new SqlCommand($"SELECT * FROM Valkyries WHERE id = '{id}'", context.sqlConnection);
 
             using (var ctx = context.sqlConnection)
             {
                 ctx.Open();
-                var task = await Task.Run(async () =>
-                    reader = await command.ExecuteReaderAsync()
-                );
+
+                reader = await command.ExecuteReaderAsync();
+                await reader.ReadAsync();
 
                 return new JsonResult(new Valkyrie
                 {
+                    Id = reader.GetInt32(0),
                     Name = reader.GetString(1),
                     Description = reader.GetString(2),
                     Image = reader.GetString(3),
