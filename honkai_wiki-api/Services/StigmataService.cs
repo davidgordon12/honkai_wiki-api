@@ -3,9 +3,10 @@ using honkai_wiki_api.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
+
 namespace honkai_wiki_api.Services
 {
-    public class ValkyrieService
+    public class StigmataService
     {
         SqlCommand command;
         SqlDataReader reader;
@@ -24,7 +25,7 @@ namespace honkai_wiki_api.Services
                     reader = await command.ExecuteReaderAsync()
                 );
 
-                while(await reader.ReadAsync())
+                while (await reader.ReadAsync())
                 {
                     valkyries.Add(new Valkyrie
                     {
