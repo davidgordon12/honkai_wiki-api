@@ -19,9 +19,9 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 ValkyrieService valkyrieService = new();
-ValkyrieService battlesuitService = new();
-ValkyrieService weaponService = new();
-ValkyrieService stigmataService = new();
+BattlesuitService battlesuitService = new();
+WeaponService weaponService = new();
+StigmataService stigmataService = new();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
