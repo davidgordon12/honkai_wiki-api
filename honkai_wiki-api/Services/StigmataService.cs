@@ -3,15 +3,14 @@ using honkai_wiki_api.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
-
 namespace honkai_wiki_api.Services
 {
-    public class StigmataService
+    public class StigmataService : IHonkaiService
     {
         SqlCommand command;
         SqlDataReader reader;
 
-        public async Task<JsonResult> GetValkyriesAsync()
+        public async Task<JsonResult> GetAsync()
         {
             HonkaiContext context = new HonkaiContext();
             List<Valkyrie> valkyries = new();
@@ -19,13 +18,13 @@ namespace honkai_wiki_api.Services
             using (var ctx = context.sqlConnection)
             {
                 ctx.Open();
-                command = new SqlCommand("SELECT * FROM Valkyries", context.sqlConnection);
+                command = new SqlCommand("SELECT * FROM Stigmatas", context.sqlConnection);
 
                 var task = await Task.Run(async () =>
                     reader = await command.ExecuteReaderAsync()
                 );
 
-                while (await reader.ReadAsync())
+                while(await reader.ReadAsync())
                 {
                     valkyries.Add(new Valkyrie
                     {
@@ -43,10 +42,10 @@ namespace honkai_wiki_api.Services
             }
         }
 
-        public async Task<JsonResult> GetValkyrieAsync(int id)
+        public async Task<JsonResult> GetAsync(int id)
         {
             HonkaiContext context = new HonkaiContext();
-            command = new SqlCommand($"SELECT * FROM Valkyries WHERE id = '{id}'", context.sqlConnection);
+            command = new SqlCommand($"SELECT * FROM Stigmatas WHERE id = '{id}'", context.sqlConnection);
 
             using (var ctx = context.sqlConnection)
             {
