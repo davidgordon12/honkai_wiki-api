@@ -1,1 +1,1 @@
-# API for Honkai Wiki
+## API for Honkai Wiki
