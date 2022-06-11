@@ -31,14 +31,20 @@ app.UseHttpsRedirection();
 
 app.MapGet("/valkyries", async () =>
 {
-    var valkyries = await valkyrieService.GetValkyriesAsync();
+    var valkyries = await valkyrieService.GetAsync();
     return Results.Ok(valkyries);
 });
 
 app.MapGet("/valkyrie/{id}", async (int id) =>
 {
-    var valkyrie = await valkyrieService.GetValkyrieAsync(id);
+    var valkyrie = await valkyrieService.GetAsync(id);
     return Results.Ok(valkyrie);
+});
+
+app.MapGet("battlesuits", async () =>
+{
+    //var battlesuits = battlesuitService.GetBattlesuitsAsync();
+    //return Results.Ok(battlesuits);
 });
 
 app.Run();

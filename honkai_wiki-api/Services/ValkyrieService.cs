@@ -5,12 +5,12 @@ using System.Data.SqlClient;
 
 namespace honkai_wiki_api.Services
 {
-    public class ValkyrieService
+    public class ValkyrieService : IHonkaiService
     {
         SqlCommand command;
         SqlDataReader reader;
 
-        public async Task<JsonResult> GetValkyriesAsync()
+        public async Task<JsonResult> GetAsync()
         {
             HonkaiContext context = new HonkaiContext();
             List<Valkyrie> valkyries = new();
@@ -42,7 +42,7 @@ namespace honkai_wiki_api.Services
             }
         }
 
-        public async Task<JsonResult> GetValkyrieAsync(int id)
+        public async Task<JsonResult> GetAsync(int id)
         {
             HonkaiContext context = new HonkaiContext();
             command = new SqlCommand($"SELECT * FROM Valkyries WHERE id = '{id}'", context.sqlConnection);
