@@ -1,3 +1,4 @@
+using honkai_wiki_api.Services;
 var origin = "_origin";
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -17,7 +18,10 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-honkai_wiki_api.Services.ValkyrieService valkyrieService = new();
+ValkyrieService valkyrieService = new();
+ValkyrieService battlesuitService = new();
+ValkyrieService weaponService = new();
+ValkyrieService stigmataService = new();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -41,10 +45,40 @@ app.MapGet("/valkyrie/{id}", async (int id) =>
     return Results.Ok(valkyrie);
 });
 
-app.MapGet("battlesuits", async () =>
+app.MapGet("/battlesuits", async () =>
 {
-    //var battlesuits = battlesuitService.GetBattlesuitsAsync();
-    //return Results.Ok(battlesuits);
+    var battlesuits = battlesuitService.GetAsync();
+    return Results.Ok(battlesuits);
+});
+
+app.MapGet("/battlesuit/{id}", async (int id) =>
+{
+    var battlesuit = battlesuitService.GetAsync(id);
+    return Results.Ok(battlesuit);
+});
+
+app.MapGet("/weapons", async () =>
+{
+    var weapons = weaponService.GetAsync();
+    return Results.Ok(weapons);
+});
+
+app.MapGet("/weapon/{id}", async (int id) =>
+{
+    var weapon = weaponService.GetAsync(id);
+    return Results.Ok(weapon);
+});
+
+app.MapGet("/stigmatas", async () =>
+{
+    var stigmatas = stigmataService.GetAsync();
+    return Results.Ok(stigmatas);
+});
+
+app.MapGet("/stigmata/{id}", async (int id) =>
+{
+    var stigmata = stigmataService.GetAsync(id);
+    return Results.Ok(stigmata);
 });
 
 app.Run();
