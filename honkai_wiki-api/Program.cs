@@ -1,6 +1,8 @@
 using honkai_wiki_api.Services;
 var origin = "_origin";
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 honkai_wiki_api.Data.HonkaiContext.conString = builder.Configuration.GetConnectionString("Akali");
 
 builder.Services.AddCors(options =>
@@ -19,6 +21,13 @@ ValkyrieService valkyrieService = new();
 BattlesuitService battlesuitService = new();
 WeaponService weaponService = new();
 StigmataService stigmataService = new();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseCors(origin);
 app.UseHttpsRedirection();
