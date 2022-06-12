@@ -8,7 +8,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: origin,
                       policy =>
                       {
-                          policy.WithOrigins("https://localhost:44304");
+                          policy.WithOrigins("https://localhost:7012", 
+                                                "https://localhost:44304");
                       });
 });
 
