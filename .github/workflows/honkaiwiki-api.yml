@@ -6,7 +6,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: honkaiwiki-api
   AZURE_WEBAPP_PACKAGE_PATH: honkai_wiki-api/publish
-  AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.honkaiwiki_api_64d6 }}
+  AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.honkaiwiki_api_bcd1 }}
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
   WORKING_DIRECTORY: honkai_wiki-api
