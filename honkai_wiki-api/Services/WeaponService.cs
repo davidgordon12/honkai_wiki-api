@@ -13,7 +13,7 @@ namespace honkai_wiki_api.Services
         public async Task<JsonResult> GetAsync()
         {
             HonkaiContext context = new HonkaiContext();
-            List<Valkyrie> valkyries = new();
+            List<Weapon> weapons = new();
 
             using (var ctx = context.sqlConnection)
             {
@@ -26,19 +26,21 @@ namespace honkai_wiki_api.Services
 
                 while(await reader.ReadAsync())
                 {
-                    valkyries.Add(new Valkyrie
+                    weapons.Add(new Weapon
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
                         Description = reader.GetString(2),
                         Image = reader.GetString(3),
-                        Weapon = reader.GetInt32(4)
+                        Type = reader.GetString(4),
+                        Atk = reader.GetFloat(5),
+                        Crt = reader.GetFloat(6)
                     });
                 }
 
                 ctx.Close();
 
-                return new JsonResult(valkyries);
+                return new JsonResult(weapons);
             }
         }
 
@@ -54,13 +56,15 @@ namespace honkai_wiki_api.Services
                 reader = await command.ExecuteReaderAsync();
                 await reader.ReadAsync();
 
-                return new JsonResult(new Valkyrie
+                return new JsonResult(new Weapon
                 {
                     Id = reader.GetInt32(0),
                     Name = reader.GetString(1),
                     Description = reader.GetString(2),
                     Image = reader.GetString(3),
-                    Weapon = reader.GetInt32(4)
+                    Type = reader.GetString(4),
+                    Atk = reader.GetFloat(5),
+                    Crt = reader.GetFloat(6)
                 });
             }
         }
