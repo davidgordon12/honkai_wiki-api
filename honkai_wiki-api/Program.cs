@@ -1,10 +1,11 @@
 using honkai_wiki_api.Services;
-var origin = "_origin";
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 honkai_wiki_api.Data.HonkaiContext.conString = builder.Configuration.GetConnectionString("Akali");
 
+var origin = "_origin";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: origin,
@@ -22,12 +23,9 @@ BattlesuitService battlesuitService = new();
 WeaponService weaponService = new();
 StigmataService stigmataService = new();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// always use swagger
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors(origin);
 app.UseHttpsRedirection();
@@ -46,37 +44,37 @@ app.MapGet("/valkyrie/{id}", async (int id) =>
 
 app.MapGet("/battlesuits", async () =>
 {
-    var battlesuits = battlesuitService.GetAsync();
+    var battlesuits = await battlesuitService.GetAsync();
     return Results.Ok(battlesuits);
 });
 
 app.MapGet("/battlesuit/{id}", async (int id) =>
 {
-    var battlesuit = battlesuitService.GetAsync(id);
+    var battlesuit = await battlesuitService.GetAsync(id);
     return Results.Ok(battlesuit);
 });
 
 app.MapGet("/weapons", async () =>
 {
-    var weapons = weaponService.GetAsync();
+    var weapons = await weaponService.GetAsync();
     return Results.Ok(weapons);
 });
 
 app.MapGet("/weapon/{id}", async (int id) =>
 {
-    var weapon = weaponService.GetAsync(id);
+    var weapon = await weaponService.GetAsync(id);
     return Results.Ok(weapon);
 });
 
 app.MapGet("/stigmatas", async () =>
 {
-    var stigmatas = stigmataService.GetAsync();
+    var stigmatas = await stigmataService.GetAsync();
     return Results.Ok(stigmatas);
 });
 
 app.MapGet("/stigmata/{id}", async (int id) =>
 {
-    var stigmata = stigmataService.GetAsync(id);
+    var stigmata = await stigmataService.GetAsync(id);
     return Results.Ok(stigmata);
 });
 
