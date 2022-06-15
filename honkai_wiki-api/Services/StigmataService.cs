@@ -13,7 +13,7 @@ namespace honkai_wiki_api.Services
         public async Task<JsonResult> GetAsync()
         {
             HonkaiContext context = new HonkaiContext();
-            List<Valkyrie> valkyries = new();
+            List<Stigmata> stigmatas = new();
 
             using (var ctx = context.sqlConnection)
             {
@@ -26,19 +26,19 @@ namespace honkai_wiki_api.Services
 
                 while(await reader.ReadAsync())
                 {
-                    valkyries.Add(new Valkyrie
+                    stigmatas.Add(new Stigmata
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
                         Description = reader.GetString(2),
                         Image = reader.GetString(3),
-                        Weapon = reader.GetInt32(4)
+                        Type = reader.GetString(4)
                     });
                 }
 
                 ctx.Close();
 
-                return new JsonResult(valkyries);
+                return new JsonResult(stigmatas);
             }
         }
 
@@ -54,13 +54,13 @@ namespace honkai_wiki_api.Services
                 reader = await command.ExecuteReaderAsync();
                 await reader.ReadAsync();
 
-                return new JsonResult(new Valkyrie
+                return new JsonResult(new Stigmata
                 {
                     Id = reader.GetInt32(0),
                     Name = reader.GetString(1),
                     Description = reader.GetString(2),
                     Image = reader.GetString(3),
-                    Weapon = reader.GetInt32(4)
+                    Type = reader.GetString(4)
                 });
             }
         }
