@@ -366,3 +366,4 @@ FodyWeavers.xsd
 honkai_wiki-api/.vscode/launch.json
 honkai_wiki-api/.vscode/tasks.json
 honkai_wiki-api/appsettings.Development.json
+/honkai_wiki-api/Properties/ServiceDependencies/honkaiwiki-api - Web Deploy/profile.arm.json
