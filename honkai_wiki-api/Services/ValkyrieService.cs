@@ -31,8 +31,7 @@ namespace honkai_wiki_api.Services
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
                         Description = reader.GetString(2),
-                        Image = reader.GetString(3),
-                        Weapon = reader.GetInt32(4)
+                        Image = reader.GetString(3)
                     });
                 }
 
@@ -59,8 +58,7 @@ namespace honkai_wiki_api.Services
                     Id = reader.GetInt32(0),
                     Name = reader.GetString(1),
                     Description = reader.GetString(2),
-                    Image = reader.GetString(3),
-                    Weapon = reader.GetInt32(4)
+                    Image = reader.GetString(3)
                 });
             }
         }
