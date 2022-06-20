@@ -12,7 +12,8 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("https://localhost:7012", 
-                                                "https://localhost:44304");
+                                                "https://localhost:44304",
+                                                    "https://roaring-palace.azurewebsites.net");
                       });
 });
 
