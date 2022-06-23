@@ -32,8 +32,10 @@ namespace honkai_wiki_api.Services
                         Name = reader.GetString(1),
                         Image = reader.GetString(2),
                         Type = reader.GetString(3),
-                        Weapon = reader.GetInt32(4),
-                        Valkyrie = reader.GetInt32(5)
+                        Element = reader.GetString(4),
+                        Rank = reader.GetString(5),
+                        Weapon = reader.GetInt32(6),
+                        Valkyrie = reader.GetInt32(7)
                     });
                 }
 
@@ -61,8 +63,10 @@ namespace honkai_wiki_api.Services
                     Name = reader.GetString(1),
                     Image = reader.GetString(2),
                     Type = reader.GetString(3),
-                    Weapon = reader.GetInt32(4),
-                    Valkyrie = reader.GetInt32(5)
+                    Element = reader.GetString(4),
+                    Rank = reader.GetString(5),
+                    Weapon = reader.GetInt32(6),
+                    Valkyrie = reader.GetInt32(7)
                 });
             }
         }
