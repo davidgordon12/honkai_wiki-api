@@ -6,7 +6,5 @@ namespace honkai_wiki_api.Models
         public string Name { get; set; }
         public string Image { get; set; }
         public string Type { get; set; }
-        public float Atk { get; set; }
-        public float Crt { get; set; }
     }
 }
